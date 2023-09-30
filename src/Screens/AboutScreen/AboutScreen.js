@@ -7,7 +7,7 @@ export default function AboutScreen({ navigation }) {
       <Text>About Screen</Text>
       <Button
         title="Go to Item"
-        onPress={() => navigation.navigate("add-item")}
+        onPress={() => navigation.navigate("new-item")}
       />
     </View>
   );

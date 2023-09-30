@@ -1,11 +1,10 @@
 import React from "react";
-import { Button, View } from "react-native";
-import TitleBanner from "../../Components/TitleBanner/TitleBanner";
+import { Button, Text, View } from "react-native";
 
-export default function ItemScreen({ navigation }) {
+export default function NewItemScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <TitleBanner />
+      <Text>New Item</Text>
       <Button
         title="Go to About"
         onPress={() => navigation.navigate("about")}
