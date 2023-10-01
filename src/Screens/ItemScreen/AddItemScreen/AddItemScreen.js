@@ -1,3 +1,4 @@
+import { useFocusEffect } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   Alert,
@@ -14,6 +15,13 @@ export default function AddItemScreen({ navigation }) {
   const [description, setDescription] = useState("");
   const [measurement, setMeasurement] = useState("");
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setDescription("");
+      setMeasurement("");
+    }, [])
+  );
 
   const handleAddItem = async () => {
     try {
@@ -115,8 +123,8 @@ export default function AddItemScreen({ navigation }) {
         />
       </View>
       <Button title="Add Item" onPress={handleAddItem} />
-      {/* Success Message Modal */}
-      <Modal
+
+        <Modal
         animationType="slide"
         transparent={true}
         visible={isSuccessModalVisible}
