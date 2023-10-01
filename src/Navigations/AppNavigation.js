@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import AboutScreen from "../Screens/AboutScreen/AboutScreen";
 import HomeScreen from "../Screens/HomeScreen/HomeScreen";
+import AddItemScreen from "../Screens/ItemScreen/AddItemScreen/AddItemScreen";
 import NewItemScreen from "../Screens/ItemScreen/NewItemScreen/NewItemScreen";
 
 const Stack = createNativeStackNavigator();
@@ -19,12 +20,17 @@ const MainStack = () => {
       <Stack.Screen
         name="about"
         component={AboutScreen}
-        options={{ title: "Welcome" }}
+        options={{ title: "About" }}
       />
       <Stack.Screen
         name="new-item"
         component={NewItemScreen}
-        options={{ title: "Welcome" }}
+        options={{ title: "New Item" }}
+      />
+      <Stack.Screen
+        name="add-item"
+        component={AddItemScreen}
+        options={{ title: "Add Item" }}
       />
     </Stack.Navigator>
   );
@@ -49,6 +55,11 @@ const MainDrawer = () => {
         name="new-item"
         component={NewItemScreen}
         options={{ title: "New Item" }}
+      />
+      <Drawer.Screen
+        name="add-item"
+        component={AddItemScreen}
+        options={{ title: "Add Item" }}
       />
     </Drawer.Navigator>
   );

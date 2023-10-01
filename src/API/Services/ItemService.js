@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://localhost:8080";
+const API_BASE_URL = "http://localhost:8080";
 
 class ItemService {
   constructor() {
@@ -21,8 +21,11 @@ class ItemService {
 
   async createItem(itemData) {
     try {
-      const response = await this.api.post("/api/items", itemData);
-      return response.data;
+      const response = await this.api.post(
+        "/precificando-back/api/items",
+        itemData
+      );
+      return response;
     } catch (error) {
       throw error;
     }
