@@ -124,7 +124,7 @@ export default function AddItemScreen({ navigation }) {
       </View>
       <Button title="Add Item" onPress={handleAddItem} />
 
-        <Modal
+      <Modal
         animationType="slide"
         transparent={true}
         visible={isSuccessModalVisible}
