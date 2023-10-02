@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "http://localhost:8080/precificando-back/api";
 
 class ItemService {
   constructor() {
@@ -10,10 +10,20 @@ class ItemService {
     });
   }
 
-  async getItems() {
+  async getAllItems() {
     try {
-      const response = await this.api.get("/api/items");
+      const response = await this.api.get("/items");
       return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllUserItems(userId) {
+    console.log(userId);
+    try {
+      const response = await this.api.get(`/users/${userId}/items`);
+      return response.data; 
     } catch (error) {
       throw error;
     }
@@ -21,10 +31,7 @@ class ItemService {
 
   async createItem(itemData) {
     try {
-      const response = await this.api.post(
-        "/precificando-back/api/items",
-        itemData
-      );
+      const response = await this.api.post("/items", itemData);
       return response;
     } catch (error) {
       throw error;
@@ -33,7 +40,7 @@ class ItemService {
 
   async updateItem(itemId, itemData) {
     try {
-      const response = await this.api.put(`/api/items/${itemId}`, itemData);
+      const response = await this.api.put(`/items/${itemId}`, itemData);
       return response.data;
     } catch (error) {
       throw error;
@@ -42,7 +49,7 @@ class ItemService {
 
   async deleteItem(itemId) {
     try {
-      const response = await this.api.delete(`/api/items/${itemId}`);
+      const response = await this.api.delete(`/items/${itemId}`);
       return response.data;
     } catch (error) {
       throw error;
