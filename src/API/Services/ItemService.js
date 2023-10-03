@@ -13,17 +13,16 @@ class ItemService {
   async getAllItems() {
     try {
       const response = await this.api.get("/items");
-      return response.data;
+      return response;
     } catch (error) {
       throw error;
     }
   }
 
   async getAllUserItems(userId) {
-    console.log(userId);
     try {
       const response = await this.api.get(`/users/${userId}/items`);
-      return response.data; 
+      return response;
     } catch (error) {
       throw error;
     }
@@ -41,7 +40,7 @@ class ItemService {
   async updateItem(itemId, itemData) {
     try {
       const response = await this.api.put(`/items/${itemId}`, itemData);
-      return response.data;
+      return response;
     } catch (error) {
       throw error;
     }
@@ -50,7 +49,7 @@ class ItemService {
   async deleteItem(itemId) {
     try {
       const response = await this.api.delete(`/items/${itemId}`);
-      return response.data;
+      return response;
     } catch (error) {
       throw error;
     }

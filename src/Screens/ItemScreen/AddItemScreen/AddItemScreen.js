@@ -26,7 +26,6 @@ export default function AddItemScreen() {
       }
     } catch (error) {
       console.error("Error fetching items:", error);
-      // Handle error fetching items
     }
   };
 
