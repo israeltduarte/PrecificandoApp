@@ -1,7 +1,24 @@
-import { Picker } from "@react-native-picker/picker";
 import React, { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
 import itemService from "../../../API/Services/ItemService";
+
+// const fetchItems = async () => {
+//   let userId = "PR_ITUser_4cc52a1e-539b-4a53-ac1c-a3df7045bb34";
+
+//   let apiItems = await itemService
+//     .getAllUserItems(userId)
+//     .then(async function response() {
+//       return response;
+//     })
+//     .catch(function (error) {
+//       console.log("error");
+//     });
+
+//   console.log(apiItems.);
+
+//   return apiItems;
+// };
 
 export default function AddItemScreen() {
   const [selectedItem, setSelectedItem] = useState("");
@@ -10,24 +27,29 @@ export default function AddItemScreen() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetchItems();
+    const getItems = async () => {
+      await itemService
+        .getAllUserItems("PR_ITUser_4cc52a1e-539b-4a53-ac1c-a3df7045bb34")
+        .then((response) => {
+          const transformedItems = response.data.map((item) => {
+            return {
+              id: item.id,
+              description: item.description,
+              measurement: item.measurement,
+              created: item.created,
+              updated: item.updated,
+              inStock: item.inStock,
+            };
+          });
+          setItems(transformedItems);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    };
+
+    getItems();
   }, []);
-
-  const fetchItems = async () => {
-    let userId = "PR_ITUser_4cc52a1e-539b-4a53-ac1c-a3df7045bb34";
-
-    try {
-      const response = await itemService.getAllUserItems(userId);
-      if (response.status === 200) {
-        const itemsData = response.data;
-        setItems(itemsData);
-      } else {
-        throw new Error("Failed to fetch items.");
-      }
-    } catch (error) {
-      console.error("Error fetching items:", error);
-    }
-  };
 
   const handleMoveStock = () => {
     console.log("Selected Item:", selectedItem);
@@ -40,15 +62,15 @@ export default function AddItemScreen() {
       <Text style={styles.title}>Movimentar Estoque</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Item</Text>
-        <Picker
-          selectedValue={selectedItem}
-          onValueChange={(itemValue) => setSelectedItem(itemValue)}
-        >
-          <Picker.Item label="Selecione um item" value="" />
-          {items.map((item) => (
-            <Picker.Item key={item.id} label={item.name} value={item.id} />
-          ))}
-        </Picker>
+        <RNPickerSelect
+          onValueChange={(value) => setSelectedItem(value)}
+          items={items.map((item) => ({
+            key: item.id,
+            value: item.id,
+            label: item.description,
+          }))}
+          value={selectedItem}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Quantidade</Text>

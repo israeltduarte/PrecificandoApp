@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import itemService from "../../../API/Services/ItemService";
 
-export default function NewItemScreen({ navigation }) {
+export default function NewItemScreen() {
   const [description, setDescription] = useState("");
   const [measurement, setMeasurement] = useState("");
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
